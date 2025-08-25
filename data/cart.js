@@ -37,3 +37,10 @@ export function updateCartQuantity() {
     console.log(cart);
     console.log(`Total items in cart: ${cartQuantity}`);
 }
+
+export function deleteFromCart(productId) {
+  const itemIndex = cart.findIndex(item => item.id === productId);
+  if (itemIndex !== -1) {
+    cart.splice(itemIndex, 1);
+  }
+}
