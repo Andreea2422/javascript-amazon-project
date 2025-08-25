@@ -61,7 +61,7 @@ export function renderPaymentSummary() {
   <button class="place-order-button button-primary">
     Place your order
   </button>
-  `;
+  `; 
 
   document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
 }
