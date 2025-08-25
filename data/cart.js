@@ -60,3 +60,11 @@ export function updateQuantityInCart(productId, newQuantity) {
   }
   displayCheckoutItemCount();
 }
+
+export function updateDeliveryOption(productId, newDeliveryOptionId) {
+  const cartItem = cart.find(item => item.id === productId);
+  if (cartItem) {
+    cartItem.deliveryOptionId = newDeliveryOptionId;
+  }
+  saveToLocalStorage();
+}
