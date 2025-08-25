@@ -68,3 +68,7 @@ export function updateDeliveryOption(productId, newDeliveryOptionId) {
   }
   saveToLocalStorage();
 }
+
+export function getCartQuantity() {
+  return cartItemCount();
+}
