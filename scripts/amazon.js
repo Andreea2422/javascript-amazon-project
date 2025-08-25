@@ -72,4 +72,7 @@ document.querySelectorAll('.js-add-to-cart').forEach(button => {
   });
 });
 
+if (localStorage.getItem('cart')) {
+  updateCartQuantity();
+}
 
