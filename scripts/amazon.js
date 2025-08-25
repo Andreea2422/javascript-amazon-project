@@ -1,4 +1,5 @@
-console.log("Amazon script loaded");
+import { addToCart, updateCartQuantity } from '../data/cart.js';
+import { products } from '../data/products.js';
 
 let productsHTML = '';
 
@@ -56,40 +57,17 @@ products.forEach(product => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+
 document.querySelectorAll('.js-add-to-cart').forEach(button => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
+    addToCart(productId);
+    updateCartQuantity();
     
-    let itemFound = false;
-    cart.forEach(item => {
-      if (item.id === productId) {
-        item.quantity += 1;
-        itemFound = true;
-      }
-    });
-
-    if (!itemFound) {
-      cart.push({
-        id: productId,
-        quantity: 1
-      });
-    }
-
-    let cartQuantity = 0;
-    cart.forEach(item => {
-      cartQuantity += item.quantity;
-    });
-
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-
     document.querySelector(`.js-added-to-cart[data-product-id="${productId}"]`).style.opacity = '1';
     setTimeout(() => {
       document.querySelector(`.js-added-to-cart[data-product-id="${productId}"]`).style.opacity = '0';
     }, 2000);
-    
-    console.log(cart);
-    console.log(`Total items in cart: ${cartQuantity}`);
-
   });
 });
 
