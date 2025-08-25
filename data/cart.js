@@ -16,7 +16,8 @@ export function addToCart(productId) {
     if (!itemFound) {
       cart.push({
         id: productId,
-        quantity: 1
+        quantity: 1,
+        deliveryOptionId: '1'
       });
     }
     saveToLocalStorage();
