@@ -5,8 +5,8 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
-export function renderOrderSummary() {
-  const cart = new Cart('cart-oop');
+export function renderOrderSummary(cartInstance = new Cart('cart-oop')) {
+  const cart = cartInstance;
   if (cart.cartItems.length === 0) {
     document.querySelector('.js-order-summary').innerHTML = '<p>Your cart is empty.</p>';
     return;
@@ -106,6 +106,7 @@ export function renderOrderSummary() {
     deleteLink.addEventListener('click', () => {
       const productId = deleteLink.dataset.productId;
       console.log('Delete item with product id', productId);
+      console.log('Cart before deletion:', cart);
       cart.deleteFromCart(productId);
       document.querySelector(`.js-cart-item-container-${productId}`).remove();
       console.log('Cart after deletion:', cart);
