@@ -1,19 +1,19 @@
 class Cart {
-  cartItems = undefined;
-  localStorageKey = undefined;
+  cartItems;
+  #localStorageKey;
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
+    this.#localStorageKey = localStorageKey;
     this.cartItems = [];
-    this.loadCart();
+    this.#loadCart();
   }
 
-  loadCart() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
+  #loadCart() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
   }
 
-  saveToLocalStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+  #saveToLocalStorage() {
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   addToCart(productId) {
@@ -32,7 +32,7 @@ class Cart {
         deliveryOptionId: '1'
       });
     }
-    this.saveToLocalStorage();
+    this.#saveToLocalStorage();
   }
 
   cartItemCount() {
@@ -40,7 +40,7 @@ class Cart {
     this.cartItems.forEach(item => {
       cartQuantity += item.quantity;
     });
-    this.saveToLocalStorage();
+    this.#saveToLocalStorage();
     return cartQuantity;
   }
 
@@ -82,7 +82,7 @@ class Cart {
     if (cartItem) {
       cartItem.deliveryOptionId = newDeliveryOptionId;
     }
-    this.saveToLocalStorage();
+    this.#saveToLocalStorage();
   }
 
 
