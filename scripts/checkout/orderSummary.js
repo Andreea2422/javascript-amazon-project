@@ -1,22 +1,21 @@
-import { cart, deleteFromCart, displayCheckoutItemCount, updateQuantityInCart, updateDeliveryOption } from "../../data/cart.js";
+import { Cart } from "../../data/cart-class.js";
 import { getProduct } from "../../data/products.js";
 import formatCurrency from ".././utils/money.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
-console.log('Cart:', cart);
-
 export function renderOrderSummary() {
-  if (cart.length === 0) {
+  const cart = new Cart('cart-oop');
+  if (cart.cartItems.length === 0) {
     document.querySelector('.js-order-summary').innerHTML = '<p>Your cart is empty.</p>';
     return;
   }
   
-  displayCheckoutItemCount();
+  cart.displayCheckoutItemCount();
 
   let cartSummaryHTML = '';
-  cart.forEach(item => {
+  cart.cartItems.forEach(item => {
     const productId = item.id;
     const product = getProduct(productId);
     const deliveryOptionId = item.deliveryOptionId;
@@ -107,7 +106,7 @@ export function renderOrderSummary() {
     deleteLink.addEventListener('click', () => {
       const productId = deleteLink.dataset.productId;
       console.log('Delete item with product id', productId);
-      deleteFromCart(productId);
+      cart.deleteFromCart(productId);
       document.querySelector(`.js-cart-item-container-${productId}`).remove();
       console.log('Cart after deletion:', cart);
       renderPaymentSummary();
@@ -134,7 +133,7 @@ export function renderOrderSummary() {
         return;
       }
       console.log('Save item with product id ', productId, 'with new quantity ', newQuantity);
-      updateQuantityInCart(productId, newQuantity);
+      cart.updateQuantityInCart(productId, newQuantity);
       document.querySelector(`.js-cart-item-container-${productId} .quantity-label`).innerHTML = newQuantity;
       renderPaymentSummary();
   }
@@ -152,7 +151,7 @@ export function renderOrderSummary() {
     option.addEventListener('click', () => {
       const { productId, deliveryOptionId } = option.dataset;
       console.log('Update delivery option for product id ', productId, ' to delivery option id ', deliveryOptionId);
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       document.querySelectorAll(`.js-delivery-option[data-product-id="${productId}"]`).forEach(opt => {
         opt.querySelector('input').checked = false;
       });
