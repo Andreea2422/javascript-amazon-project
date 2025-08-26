@@ -6,13 +6,14 @@ import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.j
 import { renderPaymentSummary } from "./paymentSummary.js";
 
 console.log('Cart:', cart);
-displayCheckoutItemCount();
 
 export function renderOrderSummary() {
   if (cart.length === 0) {
     document.querySelector('.js-order-summary').innerHTML = '<p>Your cart is empty.</p>';
     return;
   }
+  
+  displayCheckoutItemCount();
 
   let cartSummaryHTML = '';
   cart.forEach(item => {
@@ -41,7 +42,7 @@ export function renderOrderSummary() {
             <div class="product-price">
               $${formatCurrency(product.priceCents)}
             </div>
-            <div class="product-quantity">
+            <div class="product-quantity js-product-quantity-${product.id}">
               <span>
                 Quantity: <span class="quantity-label">${item.quantity}</span>
               </span>
@@ -53,7 +54,7 @@ export function renderOrderSummary() {
                 Save
               </span>
               <span> | </span>
-              <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${product.id}">
+              <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${product.id}" data-product-id="${product.id}">
                 Delete
               </span>
             </div>
