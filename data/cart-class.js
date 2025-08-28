@@ -19,7 +19,7 @@ export class Cart {
   addToCart(productId) {
     let itemFound = false;
     this.cartItems.forEach(item => {
-      if (item.id === productId) {
+      if (item.productId === productId) {
         item.quantity += 1;
         itemFound = true;
       }
@@ -27,7 +27,7 @@ export class Cart {
 
     if (!itemFound) {
       this.cartItems.push({
-        id: productId,
+        productId: productId,
         quantity: 1,
         deliveryOptionId: '1'
       });
@@ -62,7 +62,7 @@ export class Cart {
   }
 
   deleteFromCart(productId) {
-    const itemIndex = this.cartItems.findIndex(item => item.id === productId);
+    const itemIndex = this.cartItems.findIndex(item => item.productId === productId);
     if (itemIndex !== -1) {
       this.cartItems.splice(itemIndex, 1);
     }
@@ -70,7 +70,7 @@ export class Cart {
   }
 
   updateQuantityInCart(productId, newQuantity) {
-    const cartItem = this.cartItems.find(item => item.id === productId);
+    const cartItem = this.cartItems.find(item => item.productId === productId);
     if (cartItem) {
       cartItem.quantity = parseInt(newQuantity, 10);
     }
@@ -78,7 +78,7 @@ export class Cart {
   }
 
   updateDeliveryOption(productId, newDeliveryOptionId) {
-    const cartItem = this.cartItems.find(item => item.id === productId);
+    const cartItem = this.cartItems.find(item => item.productId === productId);
     if (cartItem) {
       cartItem.deliveryOptionId = newDeliveryOptionId;
     }

@@ -1,19 +1,19 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
 export function getProduct(productId) {
-  const product = products.find(p => p.id === productId);
+  const product = products.find(p => p.productId === productId);
   return product;
 }
 
 class Product {
-  id;
+  productId;
   image;
   name;
   rating;
   priceCents;
 
   constructor(productDetails) {
-    this.id = productDetails.id;
+    this.productId = productDetails.id;
     this.image = productDetails.image;
     this.name = productDetails.name;
     this.rating = productDetails.rating;
@@ -738,28 +738,28 @@ loadProductsFetch().then(() => {
   console.log('next step - promise');
 });
 
-// export function loadProducts(func) {
-//   const xhr = new XMLHttpRequest();
+export function loadProducts(func) {
+  const xhr = new XMLHttpRequest();
 
-//   xhr.addEventListener('load', () => {
-//     products = JSON.parse(xhr.response).map((productDetails) => { 
-//       if (productDetails.type === "clothing") {
-//         return new Clothing(productDetails);
-//       }
-//       return new Product(productDetails);
-//     });
-//     console.log('load products');
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => { 
+      if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+    console.log('load products');
 
-//     func();
-//   });
+    func();
+  });
 
-//   xhr.addEventListener('error', (error) => {
-//     console.error('Error loading products', error);
-//   });
+  xhr.addEventListener('error', (error) => {
+    console.error('Error loading products', error);
+  });
 
-//   xhr.open('GET', 'https://supersimplebackend.dev/products');
-//   xhr.send();
-// }
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
 // loadProducts(() => {
 //   console.log('Products loaded');
 // });

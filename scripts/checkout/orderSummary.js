@@ -16,7 +16,7 @@ export function renderOrderSummary(cartInstance = new Cart('cart-oop')) {
 
   let cartSummaryHTML = '';
   cart.cartItems.forEach(item => {
-    const productId = item.id;
+    const productId = item.productId;
     const product = getProduct(productId);
     const deliveryOptionId = item.deliveryOptionId;
     let deliveryOption = getDeliveryOption(deliveryOptionId);
@@ -25,7 +25,7 @@ export function renderOrderSummary(cartInstance = new Cart('cart-oop')) {
     const formattedDeliveryDate = deliveryDate.format('dddd, MMMM D');
     if (product) {
       cartSummaryHTML += `
-      <div class="cart-item-container js-cart-item-container-${product.id}">
+      <div class="cart-item-container js-cart-item-container-${product.productId}">
         <div class="delivery-date">
           Delivery date: ${formattedDeliveryDate}
         </div>
@@ -41,19 +41,19 @@ export function renderOrderSummary(cartInstance = new Cart('cart-oop')) {
             <div class="product-price">
               ${product.getPrice()}
             </div>
-            <div class="product-quantity js-product-quantity-${product.id}">
+            <div class="product-quantity js-product-quantity-${product.productId}">
               <span>
                 Quantity: <span class="quantity-label">${item.quantity}</span>
               </span>
-              <span class="update-quantity-link link-primary js-update-link" data-product-id="${product.id}">
+              <span class="update-quantity-link link-primary js-update-link" data-product-id="${product.productId}">
                 Update
               </span>
-              <input id="update-quantity-input-${product.id}" class="update-quantity-input" value="${item.quantity}" min="1" max="10">
-              <span class="save-quantity-link link-primary js-save-link" data-product-id="${product.id}">
+              <input id="update-quantity-input-${product.productId}" class="update-quantity-input" value="${item.quantity}" min="1" max="10">
+              <span class="save-quantity-link link-primary js-save-link" data-product-id="${product.productId}">
                 Save
               </span>
               <span> | </span>
-              <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${product.id}" data-product-id="${product.id}">
+              <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${product.productId}" data-product-id="${product.productId}">
                 Delete
               </span>
             </div>
@@ -82,10 +82,10 @@ export function renderOrderSummary(cartInstance = new Cart('cart-oop')) {
       const isChecked = option.id === item.deliveryOptionId ? 'checked' : '';
 
       html += `
-      <div class="delivery-option js-delivery-option" data-product-id="${product.id}" data-delivery-option-id="${option.id}">
+      <div class="delivery-option js-delivery-option" data-product-id="${product.productId}" data-delivery-option-id="${option.id}">
         <input type="radio" ${isChecked}
           class="delivery-option-input"
-          name="delivery-option-${product.id}">
+          name="delivery-option-${product.productId}">
         <div>
           <div class="delivery-option-date">
             ${formattedDeliveryDate}

@@ -7,6 +7,7 @@ function renderProductsGrid() {
   let productsHTML = '';
   const cart = new Cart('cart-oop');
 
+  console.log('Products in renderProductsGrid():', products);
   products.forEach(product => {
     productsHTML += `
     <div class="product-container">
@@ -50,12 +51,12 @@ function renderProductsGrid() {
 
       <div class="product-spacer"></div>
 
-      <div class="added-to-cart js-added-to-cart" data-product-id="${product.id}">
+      <div class="added-to-cart js-added-to-cart" data-product-id="${product.productId}">
         <img src="images/icons/checkmark.png">
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}"  >
+      <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.productId}"  >
         Add to Cart
       </button>
     </div>`;
