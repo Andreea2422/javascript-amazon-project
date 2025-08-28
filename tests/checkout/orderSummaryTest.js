@@ -39,8 +39,8 @@ describe('Test Suite: renderOrderSummary', () => {
     // Create a new cart and preload with items
     cart = new Cart('cart-oop-test');
     cart.cartItems = [
-      { id: productId1, quantity: 1, deliveryOptionId: '1' },
-      { id: productId2, quantity: 7, deliveryOptionId: '2' }
+      { productId: productId1, quantity: 1, deliveryOptionId: '1' },
+      { productId: productId2, quantity: 7, deliveryOptionId: '2' }
     ];
     // Force save so our mock store is initialized
     localStorage.setItem('cart-oop-test', JSON.stringify(cart.cartItems));
@@ -81,11 +81,11 @@ describe('Test Suite: renderOrderSummary', () => {
 
     // Cart object should update
     expect(cart.cartItems.length).toBe(1);
-    expect(cart.cartItems[0].id).toBe(productId1);
+    expect(cart.cartItems[0].productId).toBe(productId1);
 
     // Store should update
     const savedCart = JSON.parse(store['cart-oop-test']);
     expect(savedCart.length).toBe(1);
-    expect(savedCart[0].id).toBe(productId1);
+    expect(savedCart[0].productId).toBe(productId1);
   });
 });

@@ -2,7 +2,7 @@ import { Cart } from "../../data/cart-class.js";
 import { getProduct } from "../../data/products.js";
 import formatCurrency from ".././utils/money.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
-
+import { addOrder } from "../../data/orders.js";
 
 export function renderPaymentSummary() {
   let productTotal = 0;
@@ -79,10 +79,12 @@ export function renderPaymentSummary() {
 
     if (response.ok) {
       const order = await response.json();
+      addOrder(order);
       console.log('Order placed successfully:', order);
     } else {
       console.error('Error placing order:', response.statusText);
     }
+    window.location.href = 'orders.html';
   });
 
 
