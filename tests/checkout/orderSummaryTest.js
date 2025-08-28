@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { Cart } from "../../data/cart-class.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProductsFetch } from "../../data/products.js";
 
 describe('Test Suite: renderOrderSummary', () => {
   const productIdToRemove = '15b6fc6f-327a-4ec4-896f-486349e85a3d';
@@ -10,7 +10,7 @@ describe('Test Suite: renderOrderSummary', () => {
   let store;
 
   beforeAll((done) => {
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       done();
     });
   });
