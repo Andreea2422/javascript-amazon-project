@@ -17,17 +17,15 @@ export function renderPaymentSummary() {
     shippingTotal += deliveryOption.price;
   });
 
-  console.log('Product Total:', productTotal);
-  console.log('Shipping Total:', shippingTotal);
+  // console.log('Product Total:', productTotal);
+  // console.log('Shipping Total:', shippingTotal);
   const totalBeforeTax = productTotal + shippingTotal;
-  console.log('Total Before Tax:', totalBeforeTax);
+  // console.log('Total Before Tax:', totalBeforeTax);
 
   const taxRate = 0.1; // 10% tax
   const taxAmount = Math.round(totalBeforeTax * taxRate);
   const finalTotal = totalBeforeTax + taxAmount;
-  console.log('Final Total:', finalTotal);
-
-
+  // console.log('Final Total:', finalTotal);
 
   const paymentSummaryHTML = 
   `

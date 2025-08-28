@@ -52,8 +52,8 @@ export class Cart {
     const cartQuantity = this.cartItemCount();
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
-    console.log(this.cartItems);
-    console.log(`Total items in cart: ${cartQuantity}`);
+    // console.log(this.cartItems);
+    // console.log(`Total items in cart: ${cartQuantity}`);
   }
 
   displayCheckoutItemCount() {
@@ -91,5 +91,5 @@ export class Cart {
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('business-cart');
 
-console.log(cart);
-console.log(businessCart);
+// console.log(cart);
+// console.log(businessCart);
